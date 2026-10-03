@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import {
@@ -27,6 +28,20 @@ export default function LandingPage() {
         <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative mx-auto max-w-4xl text-center">
+          {/* Official Logo Brand Element */}
+          <div className="flex justify-center mb-6">
+            <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-3xl overflow-hidden bg-slate-900 border border-emerald-500/30 shadow-2xl shadow-emerald-950/60 p-2">
+              <Image
+                src="/logo.png"
+                alt="Incognito CUSB Official Logo"
+                width={96}
+                height={96}
+                className="h-full w-full object-contain"
+                priority
+              />
+            </div>
+          </div>
+
           {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1.5 text-xs font-semibold text-emerald-400 mb-6">
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />

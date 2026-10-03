@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     'Campus Social Platform',
   ],
   authors: [{ name: 'Incognito CUSB Student Community' }],
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export const viewport: Viewport = {

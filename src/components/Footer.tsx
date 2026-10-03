@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Shield, FileText, HelpCircle, Lock } from 'lucide-react';
 
@@ -8,8 +9,14 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500 font-black text-slate-950 text-sm">
-              IC
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden bg-slate-900 border border-emerald-500/30 p-1">
+              <Image
+                src="/logo.png"
+                alt="Incognito CUSB Logo"
+                width={32}
+                height={32}
+                className="h-full w-full object-contain"
+              />
             </div>
             <div>
               <span className="text-base font-bold text-white tracking-tight">Incognito CUSB</span>

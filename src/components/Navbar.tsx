@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -26,8 +27,15 @@ export default function Navbar() {
         {/* Brand Logo */}
         <div className="flex items-center gap-3">
           <Link href={user ? '/feed' : '/'} className="flex items-center gap-2.5 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 shadow-md shadow-emerald-950/50 group-hover:scale-105 transition-transform">
-              <span className="text-lg font-black tracking-tight text-white">IC</span>
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl overflow-hidden bg-slate-900 border border-emerald-500/30 shadow-md shadow-emerald-950/50 group-hover:scale-105 transition-transform p-0.5">
+              <Image
+                src="/logo.png"
+                alt="Incognito CUSB Logo"
+                width={40}
+                height={40}
+                className="h-full w-full object-contain"
+                priority
+              />
             </div>
             <div>
               <div className="flex items-center gap-1.5">

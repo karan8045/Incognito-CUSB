@@ -53,10 +53,20 @@ export async function POST(req: NextRequest) {
 
     const { passwordHash: _, ...safeUser } = user;
     return NextResponse.json({ user: safeUser });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[SIGNIN_ERROR]', error);
+    let errorMessage = 'An unexpected authentication error occurred.';
+    if (error?.message) {
+      if (error.message.includes('Can\'t reach database server') || error.message.includes('PrismaClientInitializationError')) {
+        errorMessage = 'Database connection failed. Please verify that DATABASE_URL in Vercel Settings has the correct Supabase host and password.';
+      } else if (error.message.includes('Authentication failed')) {
+        errorMessage = 'Database password failed. Please check the password in your DATABASE_URL.';
+      } else {
+        errorMessage = error.message;
+      }
+    }
     return NextResponse.json(
-      { error: 'An unexpected authentication error occurred.' },
+      { error: errorMessage },
       { status: 500 }
     );
   }

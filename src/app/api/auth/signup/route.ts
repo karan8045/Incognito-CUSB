@@ -94,10 +94,22 @@ export async function POST(req: NextRequest) {
     // Safe user response (no passwordHash)
     const { passwordHash: _, ...safeUser } = user;
     return NextResponse.json({ user: safeUser }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[SIGNUP_ERROR]', error);
+    let errorMessage = 'An unexpected error occurred during registration. Please try again.';
+    if (error?.message) {
+      if (error.message.includes('Can\'t reach database server') || error.message.includes('PrismaClientInitializationError')) {
+        errorMessage = 'Database connection failed. Please verify that DATABASE_URL in Vercel Settings has the correct Supabase host and password.';
+      } else if (error.message.includes('Authentication failed')) {
+        errorMessage = 'Database password failed. Please check the password in your DATABASE_URL.';
+      } else if (error.message.includes('does not exist') || error.message.includes('relation')) {
+        errorMessage = 'Database tables not found. Please paste and run schema.sql in Supabase SQL Editor.';
+      } else {
+        errorMessage = error.message;
+      }
+    }
     return NextResponse.json(
-      { error: 'An unexpected error occurred during registration. Please try again.' },
+      { error: errorMessage },
       { status: 500 }
     );
   }

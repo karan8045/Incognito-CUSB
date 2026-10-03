@@ -119,11 +119,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🌐 Deploying to Vercel (PostgreSQL Production)
 
-### 1. Provision a PostgreSQL Database
-Create a free serverless PostgreSQL database using **Neon**, **Supabase**, or **Vercel Postgres**:
-```text
-postgresql://<username>:<password>@<database_host>:5432/<database_name>?sslmode=require
-```
+### 1. Provision a PostgreSQL Database (Supabase / Neon)
+Create a free PostgreSQL database on [Supabase](https://supabase.com):
+1. Create a new project (e.g., `incognito-cusb` in region South Asia / Mumbai).
+2. Go to **SQL Editor** (`>_`) &rarr; click **+ New query**.
+3. Paste the contents of [`schema.sql`](./schema.sql) and click **Run**. This creates all 19 tables, foreign keys, indexes, and automatically seeds all 29 official CUSB departments!
+4. Copy your database connection URI from **Connect** / **Database Settings** (Port `5432` Session Mode).
 
 ### 2. Switch Prisma to PostgreSQL
 Run the switch helper:
